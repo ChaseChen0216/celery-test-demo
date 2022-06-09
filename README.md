@@ -4,7 +4,8 @@
 ## 2. Run Django
 ```shell
 pip install -r requirements.txt
-
+python manager.py migrate
+python manager.py createsuperuser
 python manager.py runserver
 ```
 
@@ -18,3 +19,4 @@ celery -app tasks flower --broker=redis://127.0.0.1:6379/0
 
 
 
+add

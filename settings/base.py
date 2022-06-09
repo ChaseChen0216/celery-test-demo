@@ -72,18 +72,18 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
         },
-        'file': {  # 保存到文件
-            # 'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': os.path.join(os.path.dirname(BASE_DIR), 'meetingroom.admin.log'),
-        },
-        'performance': {  # 保存到文件
-            # 'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'formatter': 'simple',
-            'filename': os.path.join(os.path.dirname(BASE_DIR), 'meetingroom.performance.log'),
-        },
+        # 'file': {  # 保存到文件
+        #     # 'level': 'INFO',
+        #     'class': 'logging.FileHandler',
+        #     'formatter': 'simple',
+        #     'filename': os.path.join(os.path.dirname(BASE_DIR), 'meetingroom.admin.log'),
+        # },
+        # 'performance': {  # 保存到文件
+        #     # 'level': 'INFO',
+        #     'class': 'logging.FileHandler',
+        #     'formatter': 'simple',
+        #     'filename': os.path.join(os.path.dirname(BASE_DIR), 'meetingroom.performance.log'),
+        # },
     },
 
     'root': {  # 系统全局级别默认的日志记录器，属于loggers里的一种特殊的记录器

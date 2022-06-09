@@ -87,7 +87,7 @@ LOGGING = {
     },
 
     'root': {  # 系统全局级别默认的日志记录器，属于loggers里的一种特殊的记录器
-        'handlers': ['console', 'file'],
+        'handlers': ['console'],
         'level': 'INFO',
     },
 

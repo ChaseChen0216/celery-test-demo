@@ -13,7 +13,7 @@ python manager.py runserver
 ```shell
 celery -A meetingroom worker -l=info
 celery -A meetingroom beat --scheduler django_celery_beat.schedulers:DatabaseScheduler -l=info
-celery -app tasks flower --broker=redis://127.0.0.1:6379/0
+celery -A meetingroom flower --broker=redis://127.0.0.1:6379/0
 ```
 
 

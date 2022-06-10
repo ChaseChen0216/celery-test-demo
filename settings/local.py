@@ -26,7 +26,12 @@ SIMPLEUI_HOME_ACTION = False
 
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'
+CELERY_RESULT_BACKEND = 'mon+mongodb://trading_admin:trading_admin@172.32.94.136:27021/test-frost?authSource=admin'
+CELERY_MONGODB_BACKEND_SETTINGS = {
+    'database': 'test-frost',
+    'taskmeta_collection': 'taskmeta',
+}
+CELERY_TRACK_STARTED = True
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'

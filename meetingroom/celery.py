@@ -9,7 +9,7 @@ from celery import Celery, shared_task
 # 如果没有修改settings文件路径的话 一般就是 根应用.settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.local')
 
-app = Celery('meetingroom')
+app = Celery('meetingroom', task_cls='meetingroom.backends.CustomTask')
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
@@ -21,6 +21,8 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Load task modules from all registered Django app configs.
 # 自动从加载的app寻找task.py
 app.autodiscover_tasks()
+app.loader.override_backends = {'mon': 'meetingroom.backends.MongoBackend'}
+app.conf.task_track_started = True
 
 
 @app.task(bind=True)
@@ -36,19 +38,16 @@ def debug_task(self):
 # 4 动态添加（较多） notes有截图
 
 
-from celery.schedules import crontab, solar
-
-
 # !配置文件注册
 # this is important to load the celery tasks
 # from meetingroom.tasks import add
 
-app.conf.beat_schedule = {
-    'every-5-seconds': {
-        'task': 'meetingroom.tasks.add',
-        'schedule': 5.0,
-        'args': (16, 4,)
-    },
+# app.conf.beat_schedule = {
+#     'every-5-seconds': {
+#         'task': 'meetingroom.tasks.add',
+#         'schedule': 5.0,
+#         'args': (16, 4,)
+#     },
     # 'add-every-monday-morning': {
     #     'task': 'tasks.add',
     #     'schedule': crontab(hour=7, minute=30, day_of_week=1),
@@ -59,7 +58,7 @@ app.conf.beat_schedule = {
     #     'schedule': solar('sunset', -37.81753, 144.96715),
     #     'args': (16, 16),
     # },
-}
+# }
 
 # beat进程启动时注册
 # @app.on_after_configure.connect

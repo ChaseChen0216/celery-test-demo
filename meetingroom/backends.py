@@ -86,7 +86,7 @@ class MongoBackend(_MongoBackend):
         if request:
             for field in ('args', 'kwargs'):
                 value = getattr(request, field, None)
-                meta[field] = self.encode(value)
+                meta[field] = self.encode(value) if encode else value
         return meta
 
     def _store_result(self, task_id, result, state,

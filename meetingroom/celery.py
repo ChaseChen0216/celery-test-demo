@@ -28,7 +28,8 @@ app.conf.task_track_started = True
 
 @signals.task_revoked.connect
 def on_task_revoked(sender, **kwargs):
-    sender.lock.release()
+    if sender.lock is not None:
+        sender.lock.release()
 
 
 @signals.task_prerun.connect
@@ -52,8 +53,6 @@ def on_task_prerun(sender, task_id, **kwargs):
 @app.task(bind=True)
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
-
-
 
 #
 # 设置定时任务的方式
